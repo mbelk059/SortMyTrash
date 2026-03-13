@@ -1,4 +1,4 @@
-# SortMyTrash
+# ♻️ SortMyTrash
 
 This project builds a custom waste-material classifier and explainable reasoning for recycling guidance.
 
