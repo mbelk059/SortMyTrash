@@ -1,4 +1,4 @@
-# SortMyTrash
+# ♻️ SortMyTrash
 
 This project builds a custom waste-material classifier and explainable reasoning for recycling guidance.
 
@@ -7,7 +7,6 @@ This project builds a custom waste-material classifier and explainable reasoning
 - Train a custom image classifier on waste data (TrashNet + Kaggle Garbage)
 - Evaluate with valid metrics: accuracy, precision, recall, F1, confusion matrix
 - Produce Grad-CAM visual explanations for model decisions
-- (Stretch goal) Build an optional demo interface.
 
 ## Setup
 
