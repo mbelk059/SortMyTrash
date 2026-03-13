@@ -1,4 +1,4 @@
-# SortMyTrash (ML Class Project)
+# SortMyTrash
 
 This project builds a custom waste-material classifier and explainable reasoning for recycling guidance.
 
@@ -43,6 +43,12 @@ This project builds a custom waste-material classifier and explainable reasoning
    ```bash
    python src/gradcam.py --checkpoint outputs/model_best.pth --image_path example.jpg --output outputs/gradcam.png
    ```
+
+### Optional: Prepare data from a raw folder
+If you have a raw folder with class subfolders, run:
+```bash
+python src/data_prep.py --src_dir raw_dataset --dest_dir data --split 0.8
+```
 
 ## Structure
 

@@ -38,6 +38,7 @@ def run_eval(args):
     os.makedirs(args.output_dir, exist_ok=True)
     model, device = load_model(args)
     dataset = WasteDataset(args.data_dir, split=args.split, classes=DEFAULT_CLASSES, transform=get_transforms(args.image_size, is_train=False))
+    class_names = dataset.classes
     loader = DataLoader(dataset, batch_size=args.batch_size, shuffle=False, num_workers=2, pin_memory=True)
 
     all_preds, all_labels = [], []
@@ -54,11 +55,11 @@ def run_eval(args):
     all_labels = np.array(all_labels)
     print("Accuracy:", accuracy_score(all_labels, all_preds))
     print("Classification report:")
-    print(classification_report(all_labels, all_preds, target_names=DEFAULT_CLASSES, digits=4))
+    print(classification_report(all_labels, all_preds, labels=list(range(len(class_names))), target_names=class_names, digits=4, zero_division=0))
 
-    cm = confusion_matrix(all_labels, all_preds)
+    cm = confusion_matrix(all_labels, all_preds, labels=list(range(len(class_names))))
     plt.figure(figsize=(10, 8))
-    sns.heatmap(cm, annot=True, fmt="d", xticklabels=DEFAULT_CLASSES, yticklabels=DEFAULT_CLASSES, cmap="Blues")
+    sns.heatmap(cm, annot=True, fmt="d", xticklabels=class_names, yticklabels=class_names, cmap="Blues")
     plt.xlabel("Predicted")
     plt.ylabel("True")
     plt.title("Confusion Matrix")
@@ -69,4 +70,5 @@ def run_eval(args):
 
 
 if __name__ == "__main__":
-    run_eval()
+    args = parse_args()
+    run_eval(args)
