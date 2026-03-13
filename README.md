@@ -31,13 +31,24 @@ This project builds a custom waste-material classifier and explainable reasoning
      val/
        ...
    ```
-3. Run training:
+
+Or use the included sample dataset for a quick runnable demo:
+   ```bash
+   python src/train.py --data_dir sample_data --epochs 5 --batch_size 8 --pretrained
+   ```
+
+3. Run training with full dataset:
    ```bash
    python src/train.py --data_dir data --epochs 20 --batch_size 32 --lr 1e-4 --backbone resnet18
    ```
 4. Evaluate:
    ```bash
    python src/evaluate.py --checkpoint outputs/model_best.pth --data_dir data
+   ```
+
+You can also evaluate sample dataset model with:
+   ```bash
+   python src/evaluate.py --checkpoint outputs/model_best.pth --data_dir sample_data
    ```
 5. Grad-CAM explain one image:
    ```bash
