@@ -1,4 +1,4 @@
-__pycache__/
+﻿__pycache__/
 *.py[cod]
 *.pyo
 *.pyd
@@ -6,7 +6,8 @@ __pycache__/
 venv/
 .venv/
 *.egg-info/
-outputs/
-data/
+
 trashnet-master.zip
 trashnet-master/
+
+raw_dataset/

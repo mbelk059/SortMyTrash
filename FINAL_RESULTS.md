@@ -1,25 +1,33 @@
-# SortMyTrash Final Results
+# Results
 
-## Training Results
-- Training dataset: TrashNet resized dataset
-- Model: ResNet18 backbone with final linear classifier (7 classes)
-- Augmentation: random flip, rotation, color jitter
-- 1 epoch run results: train_acc ~0.664, val_acc ~0.823
+What I ran: TrashNet resized images → `import_trashnet.py` → `data_prep.py` → train with ResNet-18 pretrained on ImageNet. Only 3 epochs because training on CPU was slow (~3.5 min per epoch). Seed 42, batch 16, lr 1e-4.
 
-## Evaluation Metrics (val set)
-- Accuracy: 0.8228
-- Per-class precision/recall/F1 (from classification report):
-  - plastic: 0.8261 / 0.7835 / 0.8042
-  - metal: 0.7200 / 0.8780 / 0.7912
-  - paper: 0.9091 / 0.8403 / 0.8734
-  - cardboard: 0.8916 / 0.9136 / 0.9024
-  - glass: 0.7636 / 0.8317 / 0.7962
-  - organic: 0 / 0 / 0 (zero support in dataset)
-  - trash: 0.9231 / 0.4286 / 0.5854
+Best validation accuracy hit **90.8%** during training; the saved weights are in `outputs/model_best.pth`.
 
-## Explainability
-- Grad-CAM visual explanation output generated: outputs/gradcam_plastic.png
+## Test set
 
-## Notes
-- Organic class is absent in TrashNet sample images; for full course, include an organic image subset.
-- Next improvements: train more epochs, tune learning rate, and evaluate on held-out real bin images.
+379 test images. Overall **accuracy ~91%**. I’m also reporting balanced accuracy and F1, macro F1 looks worse (~77%) mostly because the model still has an “organic” output neuron but never had any organic photos, so that class is empty in the data. Weighted F1 (~91%) matches how well it does on the classes that actually appear.
+
+| Metric | Value |
+|--------|--------|
+| Accuracy | ~0.91 |
+| Balanced accuracy | ~0.89 |
+| F1 macro | ~0.77 |
+| F1 weighted | ~0.91 |
+
+Per class on the test split:
+
+| Class | Precision | Recall | F1 | Support |
+|-------|-----------|--------|-----|---------|
+| plastic | 0.94 | 0.90 | 0.92 | 73 |
+| metal | 0.81 | 0.90 | 0.85 | 61 |
+| paper | 0.93 | 0.93 | 0.93 | 89 |
+| cardboard | 0.97 | 0.95 | 0.96 | 61 |
+| glass | 0.89 | 0.91 | 0.90 | 75 |
+| organic | — | — | — | 0 |
+| trash | 0.94 | 0.75 | 0.83 | 20 |
+
+Trash has the fewest test images so not surprising it’s a bit weaker. Confusion matrix and full numbers saved under `outputs/` (`test_metrics.json`, etc.).
+
+For Grad-CAM I used one image from `data/test/plastic/` and saved it as `outputs/gradcam_plastic_test.png`.
+
