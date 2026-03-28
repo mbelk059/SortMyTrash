@@ -95,7 +95,7 @@ Writes `test_metrics.json`, `test_classification_report.txt`, `test_confusion_ma
 
 ## Grad-CAM
 
-One image:
+One image (prints **predicted class** and an **illustrative** blue/green/black bin hint — not legal advice; see `src/bin_hint.py`):
 
 ```bash
 python src/gradcam.py --checkpoint outputs/model_best.pth --image_path path\to\image.jpg --output outputs/gradcam.png
@@ -120,3 +120,4 @@ python src/gradcam_batch.py --checkpoint outputs/model_best.pth --glob_pattern "
 | `src/dataset_stats.py` | Per-split counts |
 | `src/model.py` | Backbone + classifier head |
 | `src/dataset.py` | Dataset and augmentations |
+| `src/bin_hint.py` | Illustrative class → bin labels for console output / JSON |

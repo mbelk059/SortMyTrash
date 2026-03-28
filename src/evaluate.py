@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 
 from dataset import WasteDataset, get_transforms, DEFAULT_CLASSES
 from model import WasteClassifier
+from bin_hint import print_bin_mapping_reference, suggested_bin
 
 
 def parse_args():
@@ -47,6 +48,7 @@ def load_model(args):
 
 def run_eval(args):
     os.makedirs(args.output_dir, exist_ok=True)
+    print_bin_mapping_reference()
     model, device, backbone_used = load_model(args)
     dataset = WasteDataset(
         args.data_dir, split=args.split, classes=DEFAULT_CLASSES, transform=get_transforms(args.image_size, is_train=False)
@@ -107,7 +109,14 @@ def run_eval(args):
     per_class = []
     for i, name in enumerate(class_names):
         per_class.append(
-            {"class": name, "precision": float(prec[i]), "recall": float(rec[i]), "f1": float(f1[i]), "support": int(sup[i])}
+            {
+                "class": name,
+                "precision": float(prec[i]),
+                "recall": float(rec[i]),
+                "f1": float(f1[i]),
+                "support": int(sup[i]),
+                "suggested_bin_illustrative": suggested_bin(name),
+            }
         )
 
     metrics = {
@@ -119,6 +128,7 @@ def run_eval(args):
         "f1_macro": f1_macro,
         "f1_weighted": f1_weighted,
         "per_class": per_class,
+        "bin_mapping_note": "Illustrative only; local recycling rules vary.",
     }
     metrics_path = os.path.join(args.output_dir, f"{args.prefix}_metrics.json")
     with open(metrics_path, "w", encoding="utf-8") as f:

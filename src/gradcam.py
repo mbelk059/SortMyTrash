@@ -9,6 +9,7 @@ import cv2
 
 from model import WasteClassifier
 from dataset import DEFAULT_CLASSES
+from bin_hint import DISCLAIMER, suggested_bin
 
 
 def parse_args():
@@ -120,7 +121,11 @@ def run_gradcam(args):
     ax[1].set_title(f"Grad-CAM: {DEFAULT_CLASSES[predicted_class]} ({top_prob:.2f})")
     plt.tight_layout()
     plt.savefig(args.output)
+    label = DEFAULT_CLASSES[predicted_class]
     print(f"Saved Grad-CAM to {args.output}")
+    print(f"Predicted class: {label} (confidence {top_prob:.2f})")
+    print(f"Suggested bin (illustrative): {suggested_bin(label)}")
+    print(DISCLAIMER)
     gradcam.close()
 
 
