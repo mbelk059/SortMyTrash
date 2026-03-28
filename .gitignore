@@ -11,3 +11,7 @@ trashnet-master.zip
 trashnet-master/
 
 raw_dataset/
+
+# PyTorch checkpoints exceed GitHub's 100 MB per-file limit
+outputs/*.pth
+

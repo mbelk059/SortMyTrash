@@ -8,6 +8,8 @@ Image classifier for household waste: given a photo, predict one of seven materi
 - Evaluate with valid metrics: accuracy, precision, recall, F1, confusion matrix
 - Produce Grad-CAM visual explanations for model decisions
 
+**GitHub:** `.pth` weight files are **not** committed (they can exceed GitHub’s 100 MB per-file limit). Clone the repo, add `data/` if needed, run **Train** once to create `outputs/model_best.pth`, then Evaluate / Grad-CAM. Metrics and images in `outputs/` can still be committed.
+
 ## Setup
 
 ```bash
