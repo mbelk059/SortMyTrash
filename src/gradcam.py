@@ -82,9 +82,11 @@ class GradCAM:
 
 
 def run_gradcam(args):
-    os.makedirs(os.path.dirname(args.output), exist_ok=True)
-    model = WasteClassifier(num_classes=len(DEFAULT_CLASSES), backbone_name=args.backbone, pretrained=False)
+    os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
     checkpoint = torch.load(args.checkpoint, map_location="cpu")
+    saved = checkpoint.get("args") or {}
+    backbone = saved.get("backbone", args.backbone)
+    model = WasteClassifier(num_classes=len(DEFAULT_CLASSES), backbone_name=backbone, pretrained=False)
     model.load_state_dict(checkpoint["model_state_dict"])
     model.eval()
 
