@@ -29,5 +29,7 @@ Per class on the test split:
 
 Trash has the fewest test images so not surprising it’s a bit weaker. Confusion matrix and full numbers saved under `outputs/` (`test_metrics.json`, etc.).
 
-For Grad-CAM I used one image from `data/test/plastic/` and saved it as `outputs/gradcam_plastic_test.png`.
+`evaluate.py` and `gradcam.py` also print an **illustrative** blue/green/black bin hint via `src/bin_hint.py` (not legal disposal advice).
+
+For Grad-CAM I used one image from `data/test/plastic/` and saved it as `outputs/gradcam_plastic_test.png` (or `outputs/gradcam.png` on a later run).
 

@@ -4,7 +4,7 @@ Image classifier for household waste: given a photo, predict one of seven materi
 
 ## Project Scope
 
-- Train a custom image classifier on waste data (TrashNet + Kaggle Garbage)
+- Train a custom image classifier on **TrashNet**
 - Evaluate with valid metrics: accuracy, precision, recall, F1, confusion matrix
 - Produce Grad-CAM visual explanations for model decisions
 
