@@ -8,6 +8,8 @@ Image classifier for household waste: given a photo, predict one of seven materi
 - Evaluate with valid metrics: accuracy, precision, recall, F1, confusion matrix
 - Produce Grad-CAM visual explanations for model decisions
 
+See FINAL_RESULTS.md for full training history, test metrics, and baseline comparison.
+
 **GitHub:** `.pth` weight files are **not** committed (they can exceed GitHub’s 100 MB per-file limit). Clone the repo, add `data/` if needed, run **Train** once to create `outputs/model_best.pth`, then Evaluate / Grad-CAM. Metrics and images in `outputs/` can still be committed.
 
 ## Setup
@@ -70,9 +72,13 @@ python src/train.py --data_dir data --epochs 20 --batch_size 32 --lr 1e-4 --back
 ```
 
 Frozen backbone (train only the linear head / use as a simpler comparison model):
-
 ```bash
-python src/train.py --data_dir data --epochs 10 --batch_size 32 --lr 1e-3 --backbone resnet18 --pretrained --freeze_backbone --seed 42 --output_dir outputs_baseline
+python src/train.py --data_dir data --epochs 3 --batch_size 16 --lr 1e-4 --backbone resnet18 --pretrained --freeze_backbone --seed 42 --output_dir outputs_baseline
+```
+
+Then evaluate on the test split:
+```bash
+python src/evaluate.py --checkpoint outputs_baseline/model_best.pth --data_dir data --split test --prefix test_baseline --output_dir outputs_baseline
 ```
 
 EfficientNet:
