@@ -13,11 +13,20 @@ See FINAL_RESULTS.md for full training history, test metrics, and baseline compa
 **GitHub:** `.pth` weight files are **not** committed (they can exceed GitHub’s 100 MB per-file limit). Clone the repo, add `data/` if needed, run **Train** once to create `outputs/model_best.pth`, then Evaluate / Grad-CAM. Metrics and images in `outputs/` can still be committed.
 
 ## Setup
-
 ```bash
-python -m venv .venv
-.venv\Scripts\activate
+conda create -n sortmytrash python=3.10
+conda activate sortmytrash
 pip install -r requirements.txt
+```
+
+If conda activate does not work in PowerShell, prefix all commands with:
+```bash
+conda run -n sortmytrash python src/train.py ...
+```
+
+For example:
+```bash
+conda run -n sortmytrash python src/dataset_stats.py --data_dir data
 ```
 
 ## Data
