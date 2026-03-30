@@ -31,6 +31,9 @@ conda run -n sortmytrash python src/dataset_stats.py --data_dir data
 
 ## Data
 
+Download TrashNet from https://github.com/garythung/trashnet and place `trashnet-master.zip` in the project root, then unzip it.
+
+
 Expected layout under `data/`:
 
 ```
