@@ -125,6 +125,28 @@ Several images (glob):
 python src/gradcam_batch.py --checkpoint outputs/model_best.pth --glob_pattern "path\to\images\**\*.jpg" --output_dir outputs/gradcam_batch
 ```
 
+## Sample Output
+
+After training and evaluation, the following outputs are saved under `outputs/`:
+
+**Test set metrics (3 epochs, ResNet-18):**
+| Metric | Value |
+|---|---|
+| Accuracy | ~0.91 |
+| Balanced Accuracy | ~0.89 |
+| F1 (Weighted) | ~0.91 |
+| F1 (Macro) | ~0.77 |
+
+**Grad-CAM example**: model correctly identifies a plastic container with 0.98 confidence and highlights the body and edges of the item:
+
+![Grad-CAM example](outputs/gradcam.png)
+
+**Confusion matrix:**
+
+![Confusion matrix](outputs/test_confusion_matrix.png)
+
+See `FINAL_RESULTS.md` for full per-class breakdown and baseline comparison.
+
 ## Source files
 
 | File | Role |
